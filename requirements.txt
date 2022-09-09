@@ -1,0 +1,9 @@
+# CSC110 Canadian Housing Market Project Library requirements
+
+# Graphics and data visualization
+plotly
+csv
+math
+datetime
+random
+sys

@@ -1,0 +1,102 @@
+\documentclass[fontsize=11pt]{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.75in]{geometry}
+
+\title{CSC110 Project Proposal: Modelling and Projecting the Canadian Housing Market}
+\author{Alex Jang, Terence Liu, Charlie Tao}
+\date{Friday, December 14, 2021}
+
+\begin{document}
+\maketitle
+
+\section*{Problem Description and Research Question}
+
+People are constantly on the search for housing, but increasing worries about the rising Canadian housing market have been circulating in the recent months (Daoust). Factor in the news about the struggles of businesses during COVID-19 and the layoff of many workers, then it becomes reasonable why people are even more concerned about the rise of the housing market. The desired scenario for the average person is to own property earlier and for a relatively lower price, but this scenario is difficult to come across during the pandemic and isn't projected to be any easier after the pandemic subsides.
+
+During the pandemic, the demand for housing was speculated to increase due to many factors, one of which was the initial requirement of working from home. Due to supply and demand, since the supply did not change, the pricing increased as a result. Taking out loans to pay for an increased mortgage would concern whether or not interest rates during the pandemic are more favorable than the interest rates after the pandemic. Another choice for housing would be to rent, but renting is known to not be a profitable decision. This is due to how owning property works both as housing and as a financial investment, while renting only serves directly as housing.
+
+However, the pandemic has created many new variables that might flip the situation. Thus, we have decided to create a program that would help calculate which option is more wise for people financially suffering from the pandemic. By looking at data from the Canadian housing market, average Canadian mortgage debt, interest rates from Canadian banks, and more, we will attempt to answer the question: \textbf{How has the Canadian housing market been impacted by the pandemic, and would it be a good financial decision to hold off buying property during this time?} With this answer, we could not only provide useful information for the general public to make an informed decision, but also potentially help University of Toronto students figure out off-campus housing options for the coming years, especially with the current school year's occupation of the Chelsea Residence.
+
+\section*{Dataset Description}
+The dataset named ``mortgage$\_$interest$\_$rate.csv" is from https://www.ratehub.ca/best-mortgage-rates/5-year/variable. This dataset describes the variable mortgage rates from the beginning of 2010 to the end of 2020. This data is being used to calculate and project the future potential prime interest rates that a variable interest mortgage would require.
+
+The dataset named ``rental$\_$price$\_$index.csv" is from https://www.statista.com/statistics/198862/consumer-price-index-of-rented-accommodation-in-canada-since-2001/. This dataset describes rental price index in Canada from 1st quarter 2001 to 3rd quarter 2021. This data is not used in our program, but it was inspiration for creating this program in the first place.
+
+The dataset named ``real$\_$residential$\_$prices$\_$changes.csv" is from https://fred.stlouisfed.org/series/QCAR368BIS. This dataset measures changes in real residential property prices for Canada from 1971 to 2021 compared to the previous years. All of this data is being used to predict and project the future housing prices given a baseline house price that the user inputs.
+
+The dataset named ``real$\_$residential$\_$prices$\_$index2010.csv" is from https://fred.stlouisfed.org/series/QCAR628BIS. This dataset underlines changes in real residential property prices for Canada from 1970 to 2021. However, we are only using the data starting from 2010.
+
+
+\section*{Computational Overview}
+
+Our computational overview so far will come in three steps. Since the majority of our data will be that of dates and statistics relating to those dates, the first step would be to figure out some mathematical or computational model that we can enact on our data. The mathematical model that our group has decided upon is using the standard deviation of the current change in residential property price to predict the future prices. This would utilize the random and math libraries in order to calculate the normalized standard deviation with random.normalvariate(). The slight problem with predicting the future is that it is unpredictable, but our model does what it can with the data we already have. This means taking the trend and trying to following along the price change trend to get approximately what would occur in the sporadic pandemic environment. Thus, our first definitive step would be to calculate the after-interest rate for one and two years of the average mortgage debt currently and the after interest price of housing. This new dataset would later be used to compare the overall costs of the accrued house during 2022.
+
+The second step is to clean out our data sets. What our group did was read the csv files and compile them all into dictionaries mapping the date in a datetime.date format to their values. This step requires the usage of the csv library in order to read the libraries and clean out the contents with csv.reader.
+
+The final step is to aggregate our raw datasets and computed datasets into graphs using plotly. Through this medium, it will hopefully be clear the to the eye which solution ends up being the more profitable or stable out of the given options. Although it is unlikely that students will buy property, the outcome of this project will objectively support that decision or potentially make them consider buying property as an investment for their time in college.
+
+\section*{Instructions}
+\begin{enumerate}
+  \item Download the files from Markus
+  \item Unzip the file data\_files into a folder with the same name
+  \item Create a new folder that will contain all of the above files
+  \item Place this new folder into a folder of choice and make sure that PyCharm is linked to this folder.
+  \item Make sure to check requirements.txt to find and download any missing libraries. This can be done by going into Preferences, Python Interpreter, hitting the plus icon, and searching for the required libraries.
+  \item Run main.py
+  \item Answer the prompts in the console and get your graph in a new tab on your browser!
+\end{enumerate}
+
+\section*{Discussion}
+
+After completing this project and running many tests and simulations, the majority of the projections show that the Canadian housing market is much more sporadic due to the pandemic. If a customer is looking to apply for a fixed mortgage property, it is best to start as early as possible due to the change in residential property sharply trending upwards. Variable mortgage property tells a similar story. Typically, variable mortgage interest rates have intervals of 5 years, meaning that they start low and are a good way to stave off the high rates of the pandemic. As we continued the project, the results were exaggerating this reality further and further. This meant that almost every house and situation the user inputs, it would be better to buy as soon as possible with a forecast of one year.
+
+With our research and computational model, a major roadblock we encountered was the accuracy of our prediction. Since our mathematical model used random.normalvariate() to help find future data points, it is not reliable due to its lack of consistency. However, running multiple different models many times would find that the general trend is up for both fixed and variable mortgages. However, this does help in that it mathematically confirms the initial suspicion that interest rates and housing prices will shoot up during the pandemic, making early purchases safer than later purchases. Our data sets ran into the problem of being too small. We encountered paywalls with the more detailed and location specific datasets, which meant we had to settle for generalizing to all of Canada. The data that we use also inherently does not require many points since there are only 12 months in a year and 20 years of relevant data.
+
+We could further expand our project if we are able to find more specific data sets that allow us to hone in on one city or province. This could mean scraping Zillow, Zumper, etc. Another potential upgrade could be researching and studying the housing market and economy more to create a more reliable predictive model. This would ultimately require a much greater specialized education route than what we are capable of in the near future, but it would be in contrast to the far more accurate models that professionals have put out regarding this matter. One last upgrade would be to expand the options that the user could explore. This would mean incorporating ARM interst, discounted interest, and more. The process to do these would be time-consuming but not necessarily out of our knowledge scope. However, they are also not entirely useful since the majority of mortgages fall under the two categories of fixed and variable interest, which we have already covered.
+
+In conclusion, our computational result affirms and supports the claims that the public has about the Canadian Housing Market during the pandemic. It is, and will keep rising for the coming years, and until then it is quite unpredictable as to its nuance. Thus, any interest in taking out a mortgage for property should be acted upon as soon as possible in order to minimize financial losses. This especially applies to university students looking for a place to rent for their time at school; it is highly recommended to begin securing those places now before the pandemic shoots the price any higher.
+
+\section*{References}
+Bank for International Settlements, Real Residential Property Prices for Canada [QCAR628BIS], retrieved from
+
+FRED, Federal Reserve Bank of St. Louis; https://fred.stlouisfed.org/series/QCAR628BIS, December 13, 2021.
+
+\noindent Bank for International Settlements, Real Residential Property Prices for Canada [QCAR368BIS],
+
+retrieved from FRED, Federal Reserve Bank of St. Louis; https://fred.stlouisfed.org/series/QCAR368BIS,
+
+December 13, 2021.
+
+\noindent “Best 5-Year Variable Mortgage Rates - Canada Mortgage Rates.” Ratehub.ca,
+
+https://www.ratehub.ca/best-mortgage-rates/5-year/variable.
+
+\noindent Daoust, Michael, and Matthew Hoffarth. “Trends in the Canadian mortgage market: Before and during COVID-19”,
+
+Statistics Canada, 17 Feb. 2021, https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2021001-eng.htm
+
+\noindent Myers, Ben. “Rentals.ca December 2021 Rent Report.” Rentals.ca, https://rentals.ca/national-rent-report\#:~:text=The
+
+\%20average\%20rent\%20for\%20all,of\%20\%241\%2C675\%20(\%2B7\%25)
+
+\noindent Oliver, Joshua. “Soaring House Prices Stoke Fears of Canada 'Cost of Living Crisis'.” Financial Times, Financial
+
+Times, 12 May 2021, https://www.ft.com/content/77e2ec21-f823-4291-9cb6-e992c1ad69e6.
+
+\noindent Published by Statista Research Department. “House Prices in Canada Provinces 2020 with Forecast for 2022.”
+
+Statista, 15 Oct. 2021, https://www.statista.com/statistics/587661/average-house-prices-canada-by-province/.
+
+\noindent Published by Statista Research Department, and Oct 15. “Rental Price Index in Canada 2001-2021.”
+
+Statista, 15 Oct. 2021, https://www.statista.com/statistics/198862/consumer-price-index-of-rented-accommodat
+
+ion-in-canada-since-2001/.
+
+% NOTE: LaTeX does have a built-in way of generating references automatically,
+% but it's a bit tricky to use so we STRONGLY recommend writing your references
+% manually, using a standard academic format like APA or MLA.
+% (E.g., https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/general_format.html)
+
+\end{document}
